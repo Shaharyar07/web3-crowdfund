@@ -5,7 +5,7 @@ import { navlinks } from "../constants";
 
 const Sidebar = () => {
   const navigate = useNavigate();
-  const [isActive, setIsActive] = useState("dashboard");
+  const [isActive, setIsActive] = useState(`dashboard`);
   const Icon = ({ styles, name, imgUrl, disabled, handleClick }) => (
     <div
       className={`w-[48px] h-[48px] rounded-[10px] ${
@@ -29,8 +29,28 @@ const Sidebar = () => {
   return (
     <div className='flex justify-between items-center flex-col sticky top-5 [h-93vh] '>
       <Link to='/'>
-        <Icon styles='w-[52px] h-[52px] bg-[#2c2f32] ' imgUrl={logo} />
+        <Icon styles='w-[52px] h-[52px] bg-[#2c2f32]' imgUrl={logo} />
       </Link>
+      <div className='flex-1 flex flex-col justify-between items-center bg-[#1c1c24] py-4 mt-12 rounded-[20px] w-[76px]'>
+        <div className='flex flex-col justify-center items-center gap-3'>
+          {navlinks.map((link) => (
+            <Icon
+              key={link.name}
+              {...link}
+              handleClick={() => {
+                if (!link.disabled) {
+                  setIsActive(link.name);
+                  navigate(link.link);
+                }
+              }}
+            />
+          ))}
+        </div>
+        <Icon
+          styles='w-[52px] h-[52px] bg-[#1c1c24] shadow-secondary'
+          imgUrl={sun}
+        />
+      </div>
     </div>
   );
 };
