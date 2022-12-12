@@ -49,6 +49,47 @@ const CreateCampaign = () => {
             handleChange={() => {}}
           />
         </div>
+        <FormField
+          labelName='Campaign title:'
+          placeholder='Help me pay my rent..'
+          inputType='text'
+          isTextArea={true}
+          value={form.title}
+          handleChange={() => {}}
+        />
+        <div className='w-full flex justify-start items-center p-4 bg-[#8c6dfd] h-[120px] rounded-[10px]'>
+          <img
+            src={money}
+            alt='money'
+            className='w-[40px] h-[40px] object-contain'
+          />
+          <h4 className='font-epilogue font-bold text-[25px] text-white ml-[20px]'>
+            You will get 100% of the funds raised
+          </h4>
+        </div>
+        <div className='flex flex-wrap gap-[40px]'>
+          <FormField
+            labelName='Goal'
+            placeholder='Eth 0.50'
+            inputType='text'
+            value={form.target}
+            handleChange={() => {}}
+          />
+          <FormField
+            labelName='Deadline'
+            placeholder='End date'
+            inputType='date'
+            value={form.deadline}
+            handleChange={() => {}}
+          />
+          <div className='flex justify-center items-center mt-[40px]'>
+            <Button
+              btnType='submit'
+              title='Start a campaign'
+              styles='bg-[#1dc071] py-2'
+            />
+          </div>
+        </div>
       </form>
     </div>
   );
