@@ -17,8 +17,13 @@ const CreateCampaign = () => {
     target: "",
     deadline: "",
   });
+  const handleFormFieldChange = (fieldName, e) => {
+    setForm({ ...form, [fieldName]: e.target.value });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(form);
   };
 
   return (
@@ -39,23 +44,29 @@ const CreateCampaign = () => {
             placeholder='Dev Sherry...'
             inputType='text'
             value={form.name}
-            handleChange={() => {}}
+            handleChange={(e) => {
+              handleFormFieldChange("name", e);
+            }}
           />
           <FormField
             labelName='Campaign title:'
             placeholder='Help me pay my rent..'
             inputType='text'
             value={form.title}
-            handleChange={() => {}}
+            handleChange={(e) => {
+              handleFormFieldChange("title", e);
+            }}
           />
         </div>
         <FormField
-          labelName='Campaign title:'
-          placeholder='Help me pay my rent..'
+          labelName='Campaign Story:'
+          placeholder='Story..'
           inputType='text'
           isTextArea={true}
-          value={form.title}
-          handleChange={() => {}}
+          value={form.description}
+          handleChange={(e) => {
+            handleFormFieldChange("description", e);
+          }}
         />
         <div className='w-full flex justify-start items-center p-4 bg-[#8c6dfd] h-[120px] rounded-[10px]'>
           <img
@@ -73,22 +84,35 @@ const CreateCampaign = () => {
             placeholder='Eth 0.50'
             inputType='text'
             value={form.target}
-            handleChange={() => {}}
+            handleChange={(e) => {
+              handleFormFieldChange("target", e);
+            }}
           />
           <FormField
             labelName='Deadline'
             placeholder='End date'
             inputType='date'
             value={form.deadline}
-            handleChange={() => {}}
+            handleChange={(e) => {
+              handleFormFieldChange("deadline", e);
+            }}
           />
-          <div className='flex justify-center items-center mt-[40px]'>
-            <Button
-              btnType='submit'
-              title='Start a campaign'
-              styles='bg-[#1dc071] py-2'
-            />
-          </div>
+        </div>
+        <FormField
+          labelName='Image'
+          placeholder='Image URL'
+          inputType='text'
+          value={form.image}
+          handleChange={(e) => {
+            handleFormFieldChange("image", e);
+          }}
+        />
+        <div className='flex justify-center items-center mt-[40px]'>
+          <Button
+            btnType='submit'
+            title='Start a campaign'
+            styles='bg-[#1dc071] py-4'
+          />
         </div>
       </form>
     </div>
