@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { logo, menu, search, thirdweb } from "../assets";
 import { navlinks } from "../constants";
+import { useStateContext } from "../context";
 import { Button } from "./";
 const Navbar = () => {
-  const address = "0x0000000000000000000000000000000000000000";
+  const { connect, address } = useStateContext();
+
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState("dashboard");
   const [toggleDrawer, setToggleDrawer] = useState(false);
@@ -28,15 +30,11 @@ const Navbar = () => {
         <Button
           btnType='button'
           title={address ? "Create a Campaign" : "Connect"}
-          styles={
-            address ? "bg-[#4acd8d] text-white" : "bg-[#1c1c24] text-[#b3b3b3]"
-          }
+          styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
           handleClick={() => {
             if (address) {
-              navigate("/create");
-            } else {
-              ("connect()");
-            }
+              navigate("create-campaign");
+            } else connect();
           }}
         />
         <Link to='/profile'>

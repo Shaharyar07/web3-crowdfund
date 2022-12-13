@@ -5,8 +5,9 @@ import { money } from "../assets";
 import { Button } from "../components";
 import { checkIfImage } from "../utils";
 import FormField from "../components/FormField";
-
+import { useStateContext } from "../context";
 const CreateCampaign = () => {
+  const { createCampaign } = useStateContext();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
@@ -23,7 +24,20 @@ const CreateCampaign = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
+    checkIfImage(form.image, (isValid) => {
+      if (isValid) {
+        setIsLoading(true);
+        createCampaign({
+          ...form,
+          target: ethers.utils.parseEther(form.target, 18),
+        });
+        setIsLoading(false);
+        navigate("/");
+      } else {
+        alert("Please enter a valid image url");
+        setForm({ ...form, image: "" });
+      }
+    });
   };
 
   return (
