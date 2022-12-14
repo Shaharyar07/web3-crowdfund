@@ -35,9 +35,32 @@ export const StateContextProvider = ({ children }) => {
     }
   };
 
+  const getAllCompaigns = async () => {
+    try {
+      const data = await contract.call("getcampaigns");
+      const parsedData = data.map((campaign, index) => ({
+        owner: campaign.owner,
+        title: campaign.title,
+        description: campaign.description,
+        target: ethers.utils.formatEther(campaign.target.toString()),
+        deadline: campaign.deadline.toString(),
+        amountCollected: ethers.utils.formatEther(
+          campaign.amountCollected.toString()
+        ),
+        image: campaign.image,
+        id: index,
+      }));
+      return parsedData;
+      console.log("Contract call success: ", parsedData);
+    } catch (error) {
+      console.log("Contract call Failed: ", error);
+    }
+  };
+
   return (
     <StateContext.Provider
       value={{
+        getAllCompaigns,
         address,
         contract,
         connect,
