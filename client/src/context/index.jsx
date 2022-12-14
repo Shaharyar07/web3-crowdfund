@@ -50,16 +50,24 @@ export const StateContextProvider = ({ children }) => {
         image: campaign.image,
         id: index,
       }));
-      return parsedData;
       console.log("Contract call success: ", parsedData);
+      return parsedData;
     } catch (error) {
       console.log("Contract call Failed: ", error);
     }
+  };
+  const getMyCampaigns = async () => {
+    const campaigns = await getAllCompaigns();
+    const myCampaigns = campaigns.filter(
+      (campaign) => campaign.owner === address
+    );
+    return myCampaigns;
   };
 
   return (
     <StateContext.Provider
       value={{
+        getMyCampaigns,
         getAllCompaigns,
         address,
         contract,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useStateContext } from "../context";
-
+import { Campaigns } from "../components";
 const Home = () => {
   const { contract, address, getAllCompaigns } = useStateContext();
   const [isLoading, setIsLoading] = useState(false);
@@ -9,7 +9,7 @@ const Home = () => {
   const fetchCompaigns = async () => {
     setIsLoading(true);
     const data = await getAllCompaigns();
-    
+
     setCompaigns(data);
     setIsLoading(false);
   };
@@ -17,7 +17,15 @@ const Home = () => {
     if (contract) fetchCompaigns();
   }, [address, contract]);
 
-  return <div>Home</div>;
+  return (
+    <div>
+      <Campaigns
+        title='All Campaigns'
+        isLoading={isLoading}
+        campaigns={compaigns}
+      />
+    </div>
+  );
 };
 
 export default Home;
