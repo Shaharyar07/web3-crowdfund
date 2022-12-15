@@ -4,3 +4,5 @@ export { default as Button } from "./Button";
 export { default as FormField } from "./FormField";
 export { default as Campaigns } from "./Campaigns";
 export { default as CampaignCard } from "./CampaignCard";
+export { default as CountBox } from "./CountBox";
+export { default as Loader } from "./Loader";

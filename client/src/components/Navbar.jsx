@@ -29,7 +29,7 @@ const Navbar = () => {
       <div className='sm:flex hidden flex-row justify-end gap-4'>
         <Button
           btnType='button'
-          title={address ? "Create a Campaign" : "Connect"}
+          title={address ? "Create a Campaign" : "Connect Wallet"}
           styles={address ? "bg-[#1dc071]" : "bg-[#4acd8d]"}
           handleClick={() => {
             if (address) {
