@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ethers } from "ethers";
 import { money } from "../assets";
-import { Button } from "../components";
+import { Button, Loader } from "../components";
 import { checkIfImage } from "../utils";
 import FormField from "../components/FormField";
 import { useStateContext } from "../context";
@@ -24,10 +24,10 @@ const CreateCampaign = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    checkIfImage(form.image, (isValid) => {
+    checkIfImage(form.image, async (isValid) => {
       if (isValid) {
         setIsLoading(true);
-        createCampaign({
+        await createCampaign({
           ...form,
           target: ethers.utils.parseEther(form.target, 18),
         });
@@ -42,7 +42,7 @@ const CreateCampaign = () => {
 
   return (
     <div className='bg-[#1c1c24] flex flex-col justify-center items-center rounded-[10px] sm:p-10 p-4'>
-      {isLoading && "Loading..."}
+      {isLoading && <Loader />}
       <div className='flex justify-between items-center rounded-[10px] p-[16px] sm:min-w-[360px] bg-[#3a3a43]  '>
         <h1 className='font-epilogue text-[18px] sm:text-[25px] m-auto leading-[38px] text-white font-bold '>
           Start a Campaign
