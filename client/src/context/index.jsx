@@ -10,11 +10,11 @@ const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
   const { contract } = useContract(
-    "0xc137FF8150d4a2525768326c6AdC16Fc17e259f7"
+    "0xa86F9c0d63cdDDCe34e5c92de799f10aAdBb85f6"
   );
   const { mutateAsync: createCampaign } = useContractWrite(
     contract,
-    "createcampaign"
+    "createcompaign"
   );
   const address = useAddress();
   const connect = useMetamask();
@@ -37,7 +37,7 @@ export const StateContextProvider = ({ children }) => {
 
   const getAllCompaigns = async () => {
     try {
-      const data = await contract.call("getcampaigns");
+      const data = await contract.call("getCompaigns");
       const parsedData = data.map((campaign, index) => ({
         owner: campaign.owner,
         title: campaign.title,
@@ -64,7 +64,7 @@ export const StateContextProvider = ({ children }) => {
     return myCampaigns;
   };
   const donate = async (pId, amount) => {
-    const data = await contract.call("donateTocampaign", pId, {
+    const data = await contract.call("donateToCompaign", pId, {
       value: ethers.utils.parseEther(amount),
     });
 
